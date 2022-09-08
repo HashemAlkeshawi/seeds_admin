@@ -14,14 +14,16 @@ class DioHelper {
   DioHelper._();
   static DioHelper dioHelper = DioHelper._();
 
+  String backEndApiLink = "https://seedsrestaurant.000webhostapp.com/";
+  String localHostLink = "https://192.168.0.138/api_SeedsRestaurant/";
+
   getAllCategories() async {
     List responsList = [];
     try {
       Dio dio = Dio();
 
-      Response response = await dio
-          .get('https://192.168.0.138/api_SeedsRestaurant/categories.php');
-      // 'https://192.168.0.138/api_SeedsRestaurant/categories.php');
+      Response response = await dio.get('${backEndApiLink}categories.php');
+      // '${backEndApiLink}categories.php');
 
       responsList = response.data;
       log(responsList.toString());
@@ -40,7 +42,7 @@ class DioHelper {
     try {
       Dio dio = Dio();
       Response response = await dio.get(
-        'https://192.168.0.138/api_SeedsRestaurant/meals.php?catId=$categoryId',
+        '${backEndApiLink}meals.php?catId=$categoryId',
       );
 
       responsList = response.data;
@@ -59,7 +61,7 @@ class DioHelper {
     try {
       Dio dio = Dio();
       Response response = await dio.get(
-        'https://192.168.0.138/api_SeedsRestaurant/popularMeals.php',
+        '${backEndApiLink}popularMeals.php',
       );
 
       ///
@@ -81,14 +83,14 @@ class DioHelper {
     FormData formData = FormData.fromMap({'data': category.toMap()});
 
     Response<String> response = await dio.post(
-      'https://192.168.0.138/api_SeedsRestaurant/admin_fun/category.php',
+      '${backEndApiLink}admin_fun/category.php',
       data: formData,
       options: Options(method: 'POST', headers: {
         HttpHeaders.contentTypeHeader: "application/json",
       }),
       //
     );
-    // 'https://192.168.0.138/api_SeedsRestaurant/categories.php');
+    // '${backEndApiLink}categories.php');
 
     log(response.toString());
   }
@@ -104,14 +106,14 @@ class DioHelper {
       FormData formData = FormData.fromMap({'data': meal.toMap()});
 
       Response<String> response = await dio.post(
-        'https://192.168.0.138/api_SeedsRestaurant/admin_fun/meal.php',
+        '${backEndApiLink}admin_fun/meal.php',
         data: formData,
         options: Options(method: 'POST', headers: {
           HttpHeaders.contentTypeHeader: "application/json",
         }),
         //
       );
-      // 'https://192.168.0.138/api_SeedsRestaurant/categories.php');
+      // '${backEndApiLink}categories.php');
 
       log(response.toString());
     } catch (e) {
@@ -126,14 +128,14 @@ class DioHelper {
       log('formdata is ${formData.fields}');
 
       Response<String> response = await dio.post(
-        'https://192.168.0.138/api_SeedsRestaurant/admin_fun/editmeal.php',
+        '${backEndApiLink}admin_fun/editmeal.php',
         data: formData,
         options: Options(method: 'POST', headers: {
           HttpHeaders.contentTypeHeader: "application/json",
         }),
         //
       );
-      // 'https://192.168.0.138/api_SeedsRestaurant/categories.php');
+      // '${backEndApiLink}categories.php');
 
       log(response.toString());
     } catch (e) {
@@ -145,7 +147,7 @@ class DioHelper {
     try {
       Dio dio = Dio();
       Response response = await dio.put(
-        'https://192.168.0.138/api_SeedsRestaurant/admin_fun/meal.php?mealId=$mealId',
+        '${backEndApiLink}admin_fun/meal.php?mealId=$mealId',
       );
     } catch (e) {
       log(e.toString());
@@ -156,7 +158,7 @@ class DioHelper {
     try {
       Dio dio = Dio();
       Response response = await dio.delete(
-        'https://192.168.0.138/api_SeedsRestaurant/admin_fun/meal.php?mealId=$mealId',
+        '${backEndApiLink}admin_fun/meal.php?mealId=$mealId',
       );
     } catch (e) {
       log(e.toString());
@@ -172,12 +174,12 @@ class DioHelper {
           filename: fileName, contentType: MediaType('image', 'jpg'))
     });
 // await
-    Response response = await dio.post(
-        "https://192.168.0.138/api_SeedsRestaurant/admin_fun/uploadImage.php",
-        data: formData,
-        options: Options(method: 'POST', headers: {
-          HttpHeaders.contentTypeHeader: 'multipart/form-data',
-        }));
+    Response response =
+        await dio.post("${backEndApiLink}admin_fun/uploadImage.php",
+            data: formData,
+            options: Options(method: 'POST', headers: {
+              HttpHeaders.contentTypeHeader: 'multipart/form-data',
+            }));
     log(response.toString());
     return response.toString();
   }
@@ -187,9 +189,9 @@ class DioHelper {
     try {
       Dio dio = Dio();
 
-      Response response = await dio.get(
-          'https://192.168.0.138/api_SeedsRestaurant/admin_fun/actiQuists.php');
-      // 'https://192.168.0.138/api_SeedsRestaurant/categories.php');
+      Response response =
+          await dio.get('${backEndApiLink}admin_fun/actiQuists.php');
+      // '${backEndApiLink}categories.php');
 
       responsList = response.data;
       log(responsList.toString());
@@ -210,7 +212,7 @@ class DioHelper {
       FormData formData = FormData.fromMap({'data': customer.toMap()});
       log('tried to create formDate!!');
       Response<String> response = await dio.post(
-        'https://192.168.0.138/api_SeedsRestaurant/updateCustomerStatus.php',
+        '${backEndApiLink}updateCustomerStatus.php',
         data: formData,
         options: Options(method: 'POST', headers: {
           HttpHeaders.contentTypeHeader: "application/json",
@@ -218,7 +220,7 @@ class DioHelper {
         //
       );
       log(customer.toMap().toString());
-      // 'https://192.168.0.138/api_SeedsRestaurant/categories.php');
+      // '${backEndApiLink}categories.php');
       log(response.toString());
     } catch (e) {
       log(e.toString());
@@ -230,9 +232,8 @@ class DioHelper {
     try {
       Dio dio = Dio();
 
-      Response response = await dio
-          .get('https://192.168.0.138/api_SeedsRestaurant/getReservations.php');
-      // 'https://192.168.0.138/api_SeedsRestaurant/categories.php');
+      Response response = await dio.get('${backEndApiLink}getReservations.php');
+      // '${backEndApiLink}categories.php');
 
       responsList = response.data;
       log(responsList.toString());
@@ -251,9 +252,9 @@ class DioHelper {
     try {
       Dio dio = Dio();
 
-      Response response = await dio.get(
-          'https://192.168.0.138/api_SeedsRestaurant/admin_fun/actiQuists.php');
-      // 'https://192.168.0.138/api_SeedsRestaurant/categories.php');
+      Response response =
+          await dio.get('${backEndApiLink}admin_fun/actiQuists.php');
+      // '${backEndApiLink}categories.php');
 
       responsList = response.data;
       log(responsList.toString());
@@ -271,7 +272,7 @@ class DioHelper {
     try {
       Dio dio = Dio();
       Response response = await dio.get(
-        'https://192.168.0.138/api_SeedsRestaurant/admin_fun/acceptReservation.php?reservationId=$reservationId',
+        '${backEndApiLink}admin_fun/acceptReservation.php?reservationId=$reservationId',
       );
 
       log(response.toString());
@@ -285,7 +286,7 @@ class DioHelper {
     try {
       Dio dio = Dio();
       Response response = await dio.get(
-        'https://192.168.0.138/api_SeedsRestaurant/deleteReseration.php?reservationId=$reservationId',
+        '${backEndApiLink}deleteReseration.php?reservationId=$reservationId',
       );
 
       log(response.toString());
@@ -299,7 +300,7 @@ class DioHelper {
     try {
       Dio dio = Dio();
       Response response = await dio.get(
-        'https://192.168.0.138/api_SeedsRestaurant/admin_fun/getSummery.php',
+        '${backEndApiLink}admin_fun/getSummery.php',
       );
 
       log(response.toString());
