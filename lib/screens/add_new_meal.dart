@@ -16,7 +16,7 @@ import 'package:seeds_admin/widgets/appBar.dart';
 import 'package:seeds_admin/widgets/categories_list_items.dart';
 
 class AddNewMeal extends StatelessWidget {
-  List<String> days = [
+  final List<String> days = [
     'Saturday',
     'Sunday',
     'Monday',
@@ -25,6 +25,7 @@ class AddNewMeal extends StatelessWidget {
     'Thursday',
     'Friday'
   ];
+
   @override
   Widget build(BuildContext context) {
     GlobalKey<FormState> mealKey = GlobalKey<FormState>();
@@ -37,8 +38,7 @@ class AddNewMeal extends StatelessWidget {
               onTap: () async {
                 if (mealKey.currentState!.validate() &&
                     Provider.of<SeedsProvider>(context, listen: false)
-                            .mealImage !=
-                        null) {
+                        .validateMeal()) {
                   showDialog(
                       context: context,
                       barrierDismissible: false,

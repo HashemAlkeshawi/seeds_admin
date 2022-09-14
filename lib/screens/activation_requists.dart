@@ -31,6 +31,7 @@ class ActivationRequists extends StatelessWidget {
                       return provider.getActivationRequists();
                     },
                     child: ListView.builder(
+                      reverse: true,
                       itemCount: provider.customers.length,
                       shrinkWrap: true,
                       physics: const BouncingScrollPhysics(),

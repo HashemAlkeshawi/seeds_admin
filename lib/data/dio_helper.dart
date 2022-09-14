@@ -14,7 +14,7 @@ class DioHelper {
   DioHelper._();
   static DioHelper dioHelper = DioHelper._();
 
-  String backEndApiLink = "https://seedsrestaurant.000webhostapp.com/";
+  String backEndApiLink = "http://seedsrestaurant.000webhostapp.com/";
   String localHostLink = "https://192.168.0.138/api_SeedsRestaurant/";
 
   getAllCategories() async {
@@ -105,6 +105,8 @@ class DioHelper {
       Dio dio = Dio();
       FormData formData = FormData.fromMap({'data': meal.toMap()});
 
+      log('in add meal formdata is ${meal.toMap()}');
+
       Response<String> response = await dio.post(
         '${backEndApiLink}admin_fun/meal.php',
         data: formData,
@@ -115,7 +117,7 @@ class DioHelper {
       );
       // '${backEndApiLink}categories.php');
 
-      log(response.toString());
+      log('respons is ${response.toString()}');
     } catch (e) {
       log(e.toString());
     }

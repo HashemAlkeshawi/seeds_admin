@@ -92,9 +92,16 @@ class SeedsProvider extends ChangeNotifier {
 
   createMeal({bool? isEdit, String? mealImagePath}) async {
     log('in CreateMeal and isEdit is: $isEdit');
-    String imagePath = !(isEdit ?? false)
-        ? await DioHelper.dioHelper.uploadImage(mealImage ?? File(''))
-        : mealImagePath!;
+    String imagePath;
+    if (isEdit == null) {
+      imagePath = await DioHelper.dioHelper.uploadImage(mealImage ?? File(''));
+    } else if (isEdit) {
+      imagePath = await DioHelper.dioHelper.uploadImage(mealImage ?? File(''));
+    } else {
+      imagePath = mealImagePath!;
+    }
+
+    log('in create meal imagePath is $imagePath ');
     meal = Meal(
         id: mealId,
         saleDays: selectedDays ?? '',
@@ -122,6 +129,15 @@ class SeedsProvider extends ChangeNotifier {
     image = await ImagePicker().pickImage(source: source);
     mealImage = File(image!.path);
     notifyListeners();
+  }
+
+  validateMeal() {
+    return mealTitleController.text.isNotEmpty &&
+            mealDescController.text.isNotEmpty &&
+            selectedMealCategory != null &&
+            mealPriceController.text.isNotEmpty
+        ? true
+        : false;
   }
 
   addMeal() async {

@@ -80,7 +80,7 @@ class Menue extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              // provider.meals = [];
+                              provider.meals = [];
                               provider.getMeals(categories[index].id!);
                               AppRouter.navigateToWidget(
                                   Meals(categories[index]));

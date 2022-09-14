@@ -6,18 +6,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 import 'package:seeds_admin/app_router.dart';
 import 'package:seeds_admin/data/seed_provider.dart';
-import 'package:seeds_admin/modules/customer.dart';
 import 'package:seeds_admin/modules/reservatoinTemplate.dart';
-import 'package:seeds_admin/screens/activation_requists.dart';
 import 'package:seeds_admin/screens/reservation%20requists.dart';
 import 'package:seeds_admin/seedsColors.dart';
 
 reservationWidget(BuildContext context, ReservationTemplate template,
     SeedsProvider provider) {
   return Container(
+
       // height: 200.h,
       width: 343.w,
-      // margin: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+      margin: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
       decoration: BoxDecoration(
         color: SeedsColors.freeStar,
         borderRadius: BorderRadius.circular(32.r),

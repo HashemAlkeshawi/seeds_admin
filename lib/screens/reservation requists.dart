@@ -30,6 +30,7 @@ class ReservationRequists extends StatelessWidget {
                         child: Lottie.asset('assets/animation/indecator.json')),
                   )
                 : ListView.builder(
+                    reverse: true,
                     itemCount: provider.reservtionRequists.length,
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
